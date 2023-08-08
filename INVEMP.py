@@ -110,9 +110,9 @@ with tab2:
      st.write("Number of orders by menu type")
      st.table(gbmt)
 
-     # Model and Prediction
-     # with open('cdc_xgb.pkl', 'rb') as file:
-     #     cdcxgb = pickle.load(file)
+     #Model and Prediction
+     with open('cdc_xgb.pkl', 'rb') as file:
+         cdcxgb = pickle.load(file)
      
      # clustermode['frequency_cluster'] = freq_val
      # clustermode['Customer_age_cluster'] = hist_val
@@ -130,8 +130,8 @@ with tab2:
      #   'MENU_TYPE_Hot Dogs', 'MENU_TYPE_Ice Cream', 'MENU_TYPE_Indian',
      #   'MENU_TYPE_Mac & Cheese', 'MENU_TYPE_Poutine', 'MENU_TYPE_Ramen',
      #   'MENU_TYPE_Sandwiches', 'MENU_TYPE_Tacos', 'MENU_TYPE_Vegetarian']])
+     predictedchurn=cdcxgb.predict([1, 11, 60, 1, 83, freq_val, hist_val, spend_val, 0, 0, 0,0 ,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0])
      
-
      churntext = ""
      predictedchurn = 1
      if (predictedchurn == 1):
