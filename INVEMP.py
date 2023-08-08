@@ -61,10 +61,9 @@ with tab2:
             st.error(f"Failed to retrieve data from {url}. Status code: {response.status_code}")
             return None
     
-
-     gu_acd  =  "https://github.com/ShahidR-np/testzipfiles/blob/main/allcustdata.zip"
+     gu_acd  =  "https://github.com/ShahidR-np/testzipfiles/raw/main/allcustdata.zip"
      custdata = read_csv_from_zipped_github(gu_acd)
-     gu_od = "https://github.com/ShahidR-np/testzipfiles/blob/main/orderdatav2.zip"
+     gu_od = "https://github.com/ShahidR-np/testzipfiles/raw/main/orderdatav2.zip"
      orderdata = read_csv_from_zipped_github(gu_od)
 
      col1_t2, col2_t2, col3_t2 = st.columns(3)
