@@ -94,14 +94,21 @@ with tab2:
      spend_val = spend_dict[spending_level_t2]
      hist_val = hist_dict[history_level_t2]
 
+     if hist_dict == 0:
+        od = pd.read_csv("./custdatav0.csv")
+     elif hist_dict == 1:
+        od = pd.read_csv("./custdatav1.csv")
+     elif hist_dict == 2:
+        od = pd.read_csv("./custdatav2.csv")
+
      #Filtering data based on clusters
      #v1filtered = custdatav1[(custdatav1['sale_cluster'] == spend_val) & (custdatav1['Customer_age_cluster'] == hist_val) & (custdatav1['frequency_cluster'] == freq_val )]
      #v2filtered = custdatav2[(custdatav2['sale_cluster'] == spend_val) & (custdatav2['Customer_age_cluster'] == hist_val) & (custdatav2['frequency_cluster'] == freq_val )]
      filteredod = orderdata[(orderdata['sale_cluster'] == spend_val) & (orderdata['Customer_age_cluster'] == hist_val) & (orderdata['frequency_cluster'] == freq_val )]
      odgb = filteredod.groupby(['YEAR_OF_ORDER'])['ORDER_AMOUNT'].sum()
      #filteredcd = pd.concat([v1filtered, v2filtered])
-     #filteredcd = custdata[(custdata['sale_cluster'] == spend_val) & (custdata['Customer_age_cluster'] == hist_val) & (custdata['frequency_cluster'] == freq_val )]
-     #clustermode = filteredcd.mode()
+     filteredcd = od[(od['sale_cluster'] == spend_val) & (od['frequency_cluster'] == freq_val )]
+     clustermode = filteredcd.mode()
      gbmt = filteredod.groupby(['MENU_TYPE'])['MENU_TYPE'].count()
 
      st.header("Insights")
@@ -114,26 +121,25 @@ with tab2:
      with open('cdc_xgb.pkl', 'rb') as file:
          cdcxgb = pickle.load(file)
      
-     # clustermode['frequency_cluster'] = freq_val
-     # clustermode['Customer_age_cluster'] = hist_val
-     # clustermode['sale_cluster'] = spend_val
+     clustermode['frequency_cluster'] = freq_val
+     clustermode['Customer_age_cluster'] = hist_val
+     clustermode['sale_cluster'] = spend_val
 
 
-     # predictedchurn=cdcxgb.predict(clustermode[['TOTAL_PRODUCTS_SOLD', 'ORDER_AMOUNT', 'TOTAL_ORDERS',
-     #   'MIN_DAYS_BETWEEN_ORDERS', 'MAX_DAYS_BETWEEN_ORDERS',
-     #   'frequency_cluster', 'Customer_age_cluster', 'sale_cluster',
-     #   'CITY_Boston', 'CITY_Denver', 'CITY_New York City', 'CITY_San Mateo',
-     #   'CITY_Seattle', 'REGION_California', 'REGION_Colorado',
-     #   'REGION_Massachusetts', 'REGION_New York', 'REGION_Washington',
-     #   'MENU_TYPE_BBQ', 'MENU_TYPE_Chinese', 'MENU_TYPE_Crepes',
-     #   'MENU_TYPE_Ethiopian', 'MENU_TYPE_Grilled Cheese', 'MENU_TYPE_Gyros',
-     #   'MENU_TYPE_Hot Dogs', 'MENU_TYPE_Ice Cream', 'MENU_TYPE_Indian',
-     #   'MENU_TYPE_Mac & Cheese', 'MENU_TYPE_Poutine', 'MENU_TYPE_Ramen',
-     #   'MENU_TYPE_Sandwiches', 'MENU_TYPE_Tacos', 'MENU_TYPE_Vegetarian']])
-     predictedchurn=cdcxgb.predict([1, 11, 60, 1, 83, freq_val, hist_val, spend_val, 0, 0, 0,0 ,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0])
+     predictedchurn=cdcxgb.predict(clustermode[['TOTAL_PRODUCTS_SOLD', 'ORDER_AMOUNT', 'TOTAL_ORDERS',
+      'MIN_DAYS_BETWEEN_ORDERS', 'MAX_DAYS_BETWEEN_ORDERS',
+      'frequency_cluster', 'Customer_age_cluster', 'sale_cluster',
+      'CITY_Boston', 'CITY_Denver', 'CITY_New York City', 'CITY_San Mateo',
+      'CITY_Seattle', 'REGION_California', 'REGION_Colorado',
+      'REGION_Massachusetts', 'REGION_New York', 'REGION_Washington',
+      'MENU_TYPE_BBQ', 'MENU_TYPE_Chinese', 'MENU_TYPE_Crepes',
+      'MENU_TYPE_Ethiopian', 'MENU_TYPE_Grilled Cheese', 'MENU_TYPE_Gyros',
+      'MENU_TYPE_Hot Dogs', 'MENU_TYPE_Ice Cream', 'MENU_TYPE_Indian',
+      'MENU_TYPE_Mac & Cheese', 'MENU_TYPE_Poutine', 'MENU_TYPE_Ramen',
+      'MENU_TYPE_Sandwiches', 'MENU_TYPE_Tacos', 'MENU_TYPE_Vegetarian']])
+     #predictedchurn=cdcxgb.predict([1, 11, 60, 1, 83, freq_val, hist_val, spend_val, 0, 0, 0,0 ,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0])
      
      churntext = ""
-     predictedchurn = 1
      if (predictedchurn == 1):
           churntext = "LESS"
      else: 
