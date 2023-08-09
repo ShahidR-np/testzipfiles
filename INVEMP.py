@@ -163,8 +163,10 @@ with tab2:
      st.write("- The group of customer is less likely to churn the following year")
 
      st.header("Revenue Calculation")
-     st.write("- In the following year, this group of customer is estimated to have an increase of {1:.2f}% in revenue sales, which is a total revenue of {0:.2f}".format(odgb2023, percinc2023 ))
-  
+     st.write("- In the year 2022, this group of customers have generated an average monthly revenue of {0:.2f}".format(avemth2022))
+     st.write("- In the following year, this group of customer is estimated to have an increase of {0:.2f}% in revenue sales".format(percinc2023))
+     st.write("- This translates into a estimated monthly revenue of {0:.2f}, which is a total revenue of {1:.2f}.".format(avemth2023, odgb2023))
+
 
 
 
