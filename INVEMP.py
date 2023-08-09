@@ -94,11 +94,11 @@ with tab2:
      spend_val = spend_dict[spending_level_t2]
      hist_val = hist_dict[history_level_t2]
 
-     if hist_dict == 0:
+     if hist_val == 0:
         od = pd.read_csv("./custdatav0.csv")
-     elif hist_dict == 1:
+     elif hist_val == 1:
         od = pd.read_csv("./custdatav1.csv")
-     elif hist_dict == 2:
+     elif hist_val == 2:
         od = pd.read_csv("./custdatav2.csv")
 
      #Filtering data based on clusters
