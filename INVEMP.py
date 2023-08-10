@@ -173,6 +173,10 @@ if insight_button:
 
 button_return_value = st.button("Predict")
 if button_return_value:
+     freq_val = freq_dict[frequency_level_t2]
+     spend_val = spend_dict[spending_level_t2]
+     hist_val = hist_dict[history_level_t2]
+     st.write("fv:"+freq_val + " sv: " +spend_val + " hv: " + hist_val)
      with open('cdc_xgb.pkl', 'rb') as file:
           cdcxgb = pickle.load(file)
 
