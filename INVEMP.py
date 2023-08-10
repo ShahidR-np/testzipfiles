@@ -71,12 +71,19 @@ menu_Type_options = st.multiselect(
     'Menu Type',
     ['BBQ','Chinese','Crepes','Ethiopian','Grilled Cheese', 'Gyros', 'Hot Dogs', 'Ice Cream','Indian','Mac & Cheese','Poutine','Ramen','Sandwiches','Tacos','Vegetarian'])
 
+CaliVal = 0
+ColoVal = 0 
+MasVal = 0
+NewVal = 0
+WashVal = 0
+
 
 
 
 insight_button = st.button("Get Insights")
 if insight_button:
      st.write(list(region_options))
+     st.write(Region_options[[1]])
      #Variables
      generatedsales = 0 #The generate revenue for the cluster
      increasesales = 0 #The increase of revenue
