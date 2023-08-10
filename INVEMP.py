@@ -81,11 +81,9 @@ insight_button = st.button("Get Insights")
 if insight_button:
      if len(region_options) > 0:
           st.write("menuoptions:", region_options)
-          regs = []
-          for region in region_options:
-               st.write(region)
-               regs.append(region)
-          st.write(regs)
+          if region_options.contains('California'):
+               CaliVal = 1
+     st.write(CaliVal)
      
      #Variables
      generatedsales = 0 #The generate revenue for the cluster
