@@ -173,7 +173,6 @@ if insight_button:
 
 button_return_value = st.button("Predict")
 if button_return_value:
-     st.write("fv:"+freq_val + " sv: " +spend_val + " hv: " + hist_val)
      with open('cdc_xgb.pkl', 'rb') as file:
           cdcxgb = pickle.load(file)
 
