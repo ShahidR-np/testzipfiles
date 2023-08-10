@@ -67,9 +67,9 @@ with col3_t2:
 region_options = st.multiselect(
     'Region',
     ['California', 'Colorado', 'Massachusetts', 'New York', 'Washington'])
-menu_Type_options = st.multiselect(
-    'Menu Type',
-    ['BBQ','Chinese','Crepes','Ethiopian','Grilled Cheese', 'Gyros', 'Hot Dogs', 'Ice Cream','Indian','Mac & Cheese','Poutine','Ramen','Sandwiches','Tacos','Vegetarian'])
+# menu_Type_options = st.multiselect(
+#     'Menu Type',
+#     ['BBQ','Chinese','Crepes','Ethiopian','Grilled Cheese', 'Gyros', 'Hot Dogs', 'Ice Cream','Indian','Mac & Cheese','Poutine','Ramen','Sandwiches','Tacos','Vegetarian'])
           
 insight_button = st.button("Get Insights")
 if insight_button:
