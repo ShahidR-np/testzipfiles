@@ -227,6 +227,25 @@ if button_return_value:
      
      clustermode = filteredcd.mode()
      
+     newODdata = []
+     
+     #v1filtered = custdatav1[(custdatav1['sale_cluster'] == spend_val) & (custdatav1['Customer_age_cluster'] == hist_val) & (custdatav1['frequency_cluster'] == freq_val )]
+     #v2filtered = custdatav2[(custdatav2['sale_cluster'] == spend_val) & (custdatav2['Customer_age_cluster'] == hist_val) & (custdatav2['frequency_cluster'] == freq_val )]
+     filteredod = orderdata[(orderdata['sale_cluster'] == spend_val) & (orderdata['Customer_age_cluster'] == hist_val) & (orderdata['frequency_cluster'] == freq_val )]
+     CaliOD = filteredod[(filteredod['REGION_California'] == CaliVal)]
+     ColoOD = filteredod[(filteredod['REGION_Colorado'] == ColoVal)]
+     MasOD = filteredod[(filteredod['REGION_Massachusetts'] == MasVal)]
+     NyOD = filteredod[(filteredod['REGION_New York'] == NewVal)]
+     WasOD = filteredod[(filteredod['REGION_Washington'] == WashVal)]
+     reg_data = [CaliOD, ColoOD, MasOD, NyOD, WasOD]
+
+     
+     for i in range(len(reg_vals)):
+          if reg_vals[i] == 1:
+               newODdata.append(reg_data[i])
+     if reg_chosen == 0:
+          st.write("Regions Chosen")
+          filteredod = pd.concat(newODdata)
      with open('cdc_xgb.pkl', 'rb') as file:
           cdcxgb = pickle.load(file)
 
