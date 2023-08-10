@@ -72,7 +72,6 @@ menu_Type_options = st.multiselect(
     ['BBQ','Chinese','Crepes','Ethiopian','Grilled Cheese', 'Gyros', 'Hot Dogs', 'Ice Cream','Indian','Mac & Cheese','Poutine','Ramen','Sandwiches','Tacos','Vegetarian'])
           
 CaliVal = 0
-ColoVal = 0 
 MasVal = 0
 NewVal = 0
 WashVal = 0
@@ -92,9 +91,14 @@ def set_regionvals(region):
 insight_button = st.button("Get Insights")
 if insight_button:
      if len(region_options) > 0:
-          for i in range(len(region_options)):
-               st.write(region_options[i])
-               set_regionvals(region_options[i])
+          # for i in range(len(region_options)):
+          #      st.write(region_options[i])
+          #      set_regionvals(region_options[i])
+          for i in region_options:
+               regstr = str(i)
+               st.write("Regstr:",regstr)
+               if regstr == 'California':
+                    st.write("calii")
      st.write(CaliVal)
      
      #Variables
