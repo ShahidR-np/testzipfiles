@@ -70,46 +70,51 @@ region_options = st.multiselect(
 menu_Type_options = st.multiselect(
     'Menu Type',
     ['BBQ','Chinese','Crepes','Ethiopian','Grilled Cheese', 'Gyros', 'Hot Dogs', 'Ice Cream','Indian','Mac & Cheese','Poutine','Ramen','Sandwiches','Tacos','Vegetarian'])
-#Variables
-generatedsales = 0 #The generate revenue for the cluster
-increasesales = 0 #The increase of revenue
-increaseperc = 0 #The increase of percentage in sales
 
-#Cluster vals
-freq_dict= {'High Frequency':0, 'Average Frequency':2, 'Low Frequency':1}
-spend_dict= {'High-Spending':0, 'Average-Spending':2, 'Low-Spending':1}
-hist_dict= {"Long-Standing":2, "Regular":0, "New":1}
-
-freq_val = freq_dict[frequency_level_t2]
-spend_val = spend_dict[spending_level_t2]
-hist_val = hist_dict[history_level_t2]
-if hist_val == 0:
-   od = pd.read_csv("./custdatav0.csv")
-elif hist_val == 1:
-   od = pd.read_csv("./custdatav1.csv")
-elif hist_val == 2:
-   od = pd.read_csv("./custdatav2.csv")
-#Filtering data based on clusters
-#v1filtered = custdatav1[(custdatav1['sale_cluster'] == spend_val) & (custdatav1['Customer_age_cluster'] == hist_val) & (custdatav1['frequency_cluster'] == freq_val )]
-#v2filtered = custdatav2[(custdatav2['sale_cluster'] == spend_val) & (custdatav2['Customer_age_cluster'] == hist_val) & (custdatav2['frequency_cluster'] == freq_val )]
-filteredod = orderdata[(orderdata['sale_cluster'] == spend_val) & (orderdata['Customer_age_cluster'] == hist_val) & (orderdata['frequency_cluster'] == freq_val )]
-odgb = filteredod.groupby(['YEAR_OF_ORDER'])['ORDER_AMOUNT'].sum()
-#filteredcd = pd.concat([v1filtered, v2filtered])
-filteredcd = od[(od['sale_cluster'] == spend_val) & (od['frequency_cluster'] == freq_val )]
-clustermode = filteredcd.mode()
-gbmt = filteredod.groupby(['MENU_TYPE'])['MENU_TYPE'].count()
-
-st.header("Insights")
-st.write("Total Revenue by Year")
-st.bar_chart(odgb)
-st.write("Number of orders by menu type")
-st.table(gbmt)
+insight_button = st.button("Get Insights")
+if insight_button:
+     #Variables
+     generatedsales = 0 #The generate revenue for the cluster
+     increasesales = 0 #The increase of revenue
+     increaseperc = 0 #The increase of percentage in sales
+     
+     #Cluster vals
+     freq_dict= {'High Frequency':0, 'Average Frequency':2, 'Low Frequency':1}
+     spend_dict= {'High-Spending':0, 'Average-Spending':2, 'Low-Spending':1}
+     hist_dict= {"Long-Standing":2, "Regular":0, "New":1}
+     
+     freq_val = freq_dict[frequency_level_t2]
+     spend_val = spend_dict[spending_level_t2]
+     hist_val = hist_dict[history_level_t2]
+     if hist_val == 0:
+        od = pd.read_csv("./custdatav0.csv")
+     elif hist_val == 1:
+        od = pd.read_csv("./custdatav1.csv")
+     elif hist_val == 2:
+        od = pd.read_csv("./custdatav2.csv")
+     #Filtering data based on clusters
+     #v1filtered = custdatav1[(custdatav1['sale_cluster'] == spend_val) & (custdatav1['Customer_age_cluster'] == hist_val) & (custdatav1['frequency_cluster'] == freq_val )]
+     #v2filtered = custdatav2[(custdatav2['sale_cluster'] == spend_val) & (custdatav2['Customer_age_cluster'] == hist_val) & (custdatav2['frequency_cluster'] == freq_val )]
+     filteredod = orderdata[(orderdata['sale_cluster'] == spend_val) & (orderdata['Customer_age_cluster'] == hist_val) & (orderdata['frequency_cluster'] == freq_val )]
+     odgb = filteredod.groupby(['YEAR_OF_ORDER'])['ORDER_AMOUNT'].sum()
+     #filteredcd = pd.concat([v1filtered, v2filtered])
+     filteredcd = od[(od['sale_cluster'] == spend_val) & (od['frequency_cluster'] == freq_val )]
+     clustermode = filteredcd.mode()
+     gbmt = filteredod.groupby(['MENU_TYPE'])['MENU_TYPE'].count()
+     
+     st.header("Insights")
+     st.write("Total Revenue by Year")
+     st.bar_chart(odgb)
+     st.write("Number of orders by menu type")
+     st.table(gbmt)
 
 # Model and Prediction
-with open('cdc_xgb.pkl', 'rb') as file:
-    cdcxgb = pickle.load(file)
+
 button_return_value = st.button("Predict")
 if button_return_value:
+     with open('cdc_xgb.pkl', 'rb') as file:
+          cdcxgb = pickle.load(file)
+
      clustermode['frequency_cluster'] = freq_val
      clustermode['Customer_age_cluster'] = hist_val
      clustermode['sale_cluster'] = spend_val
