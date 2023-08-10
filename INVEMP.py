@@ -98,11 +98,22 @@ if insight_button:
           #      set_regionvals(region_options[i])
           for i in region_options:
                regstr = str(i)
-               st.write("Regstr:",regstr)
                if regstr == 'California':
-                    st.write("calii")
                     CaliVal = 1
+               elif regstr == 'Colorado':
+                    ColoVal = 1
+               elif regstr == 'Massachusetts':
+                    MasVal = 1
+               elif regstr == 'New York':
+                    NewVal = 1
+               elif regstr == 'Washington':
+                    WashVal = 1
      st.write(CaliVal)
+     st.write(ColoVal)
+     st.write(MasVal)
+     st.write(NewVal)
+     st.write(WashVal)
+
      
      #Variables
      generatedsales = 0 #The generate revenue for the cluster
