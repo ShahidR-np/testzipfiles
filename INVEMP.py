@@ -71,8 +71,12 @@ menu_Type_options = st.multiselect(
     'Menu Type',
     ['BBQ','Chinese','Crepes','Ethiopian','Grilled Cheese', 'Gyros', 'Hot Dogs', 'Ice Cream','Indian','Mac & Cheese','Poutine','Ramen','Sandwiches','Tacos','Vegetarian'])
 
+
+
+
 insight_button = st.button("Get Insights")
 if insight_button:
+     st.write(list(region_options))
      #Variables
      generatedsales = 0 #The generate revenue for the cluster
      increasesales = 0 #The increase of revenue
@@ -101,9 +105,10 @@ if insight_button:
      filteredcd = od[(od['sale_cluster'] == spend_val) & (od['frequency_cluster'] == freq_val )]
      clustermode = filteredcd.mode()
      gbmt = filteredod.groupby(['MENU_TYPE'])['MENU_TYPE'].count()
+     gbmt = gbmt.sort_values(ascending = False)
      
      st.header("Insights")
-     st.write("Total Revenue by Year")
+     st.write("Total Sales by Year")
      st.bar_chart(odgb)
      st.write("Number of orders by menu type")
      st.table(gbmt)
