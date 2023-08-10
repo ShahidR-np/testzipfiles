@@ -102,66 +102,67 @@ st.table(gbmt)
 # Model and Prediction
 with open('cdc_xgb.pkl', 'rb') as file:
     cdcxgb = pickle.load(file)
-
-clustermode['frequency_cluster'] = freq_val
-clustermode['Customer_age_cluster'] = hist_val
-clustermode['sale_cluster'] = spend_val
-
-
-predictedchurn=cdcxgb.predict(clustermode[['TOTAL_PRODUCTS_SOLD', 'ORDER_AMOUNT', 'TOTAL_ORDERS',
-  'MIN_DAYS_BETWEEN_ORDERS', 'MAX_DAYS_BETWEEN_ORDERS',
-  'frequency_cluster', 'Customer_age_cluster', 'sale_cluster',
-  'CITY_Boston', 'CITY_Denver', 'CITY_New York City', 'CITY_San Mateo',
-  'CITY_Seattle', 'REGION_California', 'REGION_Colorado',
-  'REGION_Massachusetts', 'REGION_New York', 'REGION_Washington',
-  'MENU_TYPE_BBQ', 'MENU_TYPE_Chinese', 'MENU_TYPE_Crepes',
-  'MENU_TYPE_Ethiopian', 'MENU_TYPE_Grilled Cheese', 'MENU_TYPE_Gyros',
-  'MENU_TYPE_Hot Dogs', 'MENU_TYPE_Ice Cream', 'MENU_TYPE_Indian',
-  'MENU_TYPE_Mac & Cheese', 'MENU_TYPE_Poutine', 'MENU_TYPE_Ramen',
-  'MENU_TYPE_Sandwiches', 'MENU_TYPE_Tacos', 'MENU_TYPE_Vegetarian']])
-
-
-#predictedchurn = 1
-churntext = ""
-if (predictedchurn == 1):
-     churntext = "LESS"
-else: 
-     churntext = "MORE"
-
-odgb2022 = filteredod[filteredod['YEAR_OF_ORDER'] == 2022]
-odgb2021 = filteredod[filteredod['YEAR_OF_ORDER'] == 2021]
-odgb2020 = filteredod[filteredod['YEAR_OF_ORDER'] == 2020]
-odgb2019 = filteredod[filteredod['YEAR_OF_ORDER'] == 2019]
-avemth2022 = odgb[2022] / odgb2022['MONTH_OF_ORDER'].nunique()
-avemth2021 = odgb[2021] / odgb2021['MONTH_OF_ORDER'].nunique()
-avemth2020 = odgb[2020] / odgb2020['MONTH_OF_ORDER'].nunique()
-avemth2019 = odgb[2019] / odgb2019['MONTH_OF_ORDER'].nunique()
-
-percinc2020 = ((avemth2020-avemth2019)/avemth2019) * 100
-percinc2021 = ((avemth2021-avemth2020)/avemth2020) * 100
-percinc2022 = ((avemth2022-avemth2021)/avemth2021) * 100
-
-roi2021 = ((percinc2021 - percinc2020)/percinc2020) * 100
-roi2022 = ((percinc2022 - percinc2021)/percinc2021) * 100
-percinc2023 = ((100 + ((roi2021+roi2022)/2)) /100) * percinc2022
-avemth2023 = avemth2022 * ((100 + percinc2023)/100)
-odgb2023 = avemth2023 * 12
-
-
-
-generatedsales = odgb[2022]
-increasesales = odgb[2022] - odgb[2021]
-increaseperc = increasesales / generatedsales * 1002
-
-st.header("Prediction")
-st.write ("This cluster of customers is " + churntext + " likely to churn as compared to other clusters")
-st.write("After the implementation of discount coupon vouchers to these group of customer,")
-st.write("- The group of customer is less likely to churn the following year")
-
-st.header("Revenue Calculation")
-st.write("- In the year 2022, this group of customers have generated an average monthly sales of {0:.2f}".format(avemth2022))
-st.write("- In the following year, this group of customer is estimated to have an increase of {0:.2f}% in sales".format(percinc2023))
-st.write("- This translates into a estimated monthly sales of {0:.2f}, which is a total sales of {1:.2f}.".format(avemth2023, odgb2023))
+button_return_value = st.button("Predict")
+if button_return_value:
+     clustermode['frequency_cluster'] = freq_val
+     clustermode['Customer_age_cluster'] = hist_val
+     clustermode['sale_cluster'] = spend_val
+     
+     
+     predictedchurn=cdcxgb.predict(clustermode[['TOTAL_PRODUCTS_SOLD', 'ORDER_AMOUNT', 'TOTAL_ORDERS',
+       'MIN_DAYS_BETWEEN_ORDERS', 'MAX_DAYS_BETWEEN_ORDERS',
+       'frequency_cluster', 'Customer_age_cluster', 'sale_cluster',
+       'CITY_Boston', 'CITY_Denver', 'CITY_New York City', 'CITY_San Mateo',
+       'CITY_Seattle', 'REGION_California', 'REGION_Colorado',
+       'REGION_Massachusetts', 'REGION_New York', 'REGION_Washington',
+       'MENU_TYPE_BBQ', 'MENU_TYPE_Chinese', 'MENU_TYPE_Crepes',
+       'MENU_TYPE_Ethiopian', 'MENU_TYPE_Grilled Cheese', 'MENU_TYPE_Gyros',
+       'MENU_TYPE_Hot Dogs', 'MENU_TYPE_Ice Cream', 'MENU_TYPE_Indian',
+       'MENU_TYPE_Mac & Cheese', 'MENU_TYPE_Poutine', 'MENU_TYPE_Ramen',
+       'MENU_TYPE_Sandwiches', 'MENU_TYPE_Tacos', 'MENU_TYPE_Vegetarian']])
+     
+     
+     #predictedchurn = 1
+     churntext = ""
+     if (predictedchurn == 1):
+          churntext = "LESS"
+     else: 
+          churntext = "MORE"
+     
+     odgb2022 = filteredod[filteredod['YEAR_OF_ORDER'] == 2022]
+     odgb2021 = filteredod[filteredod['YEAR_OF_ORDER'] == 2021]
+     odgb2020 = filteredod[filteredod['YEAR_OF_ORDER'] == 2020]
+     odgb2019 = filteredod[filteredod['YEAR_OF_ORDER'] == 2019]
+     avemth2022 = odgb[2022] / odgb2022['MONTH_OF_ORDER'].nunique()
+     avemth2021 = odgb[2021] / odgb2021['MONTH_OF_ORDER'].nunique()
+     avemth2020 = odgb[2020] / odgb2020['MONTH_OF_ORDER'].nunique()
+     avemth2019 = odgb[2019] / odgb2019['MONTH_OF_ORDER'].nunique()
+     
+     percinc2020 = ((avemth2020-avemth2019)/avemth2019) * 100
+     percinc2021 = ((avemth2021-avemth2020)/avemth2020) * 100
+     percinc2022 = ((avemth2022-avemth2021)/avemth2021) * 100
+     
+     roi2021 = ((percinc2021 - percinc2020)/percinc2020) * 100
+     roi2022 = ((percinc2022 - percinc2021)/percinc2021) * 100
+     percinc2023 = ((100 + ((roi2021+roi2022)/2)) /100) * percinc2022
+     avemth2023 = avemth2022 * ((100 + percinc2023)/100)
+     odgb2023 = avemth2023 * 12
+     
+     
+     
+     generatedsales = odgb[2022]
+     increasesales = odgb[2022] - odgb[2021]
+     increaseperc = increasesales / generatedsales * 1002
+     
+     st.header("Prediction")
+     st.write ("This cluster of customers is " + churntext + " likely to churn as compared to other clusters")
+     st.write("After the implementation of discount coupon vouchers to these group of customer,")
+     st.write("- The group of customer is less likely to churn the following year")
+     
+     st.header("Revenue Calculation")
+     st.write("- In the year 2022, this group of customers have generated an average monthly sales of {0:.2f}".format(avemth2022))
+     st.write("- In the following year, this group of customer is estimated to have an increase of {0:.2f}% in sales".format(percinc2023))
+     st.write("- This translates into a estimated monthly sales of {0:.2f}, which is a total sales of {1:.2f}.".format(avemth2023, odgb2023))
 
 
 
