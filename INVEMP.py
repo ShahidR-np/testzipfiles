@@ -79,13 +79,15 @@ WashVal = 0
 
 insight_button = st.button("Get Insights")
 if insight_button:
+     st.write(len(region_options))
+     st.write(region_options)
      regions = []
      num_reg = len(region_options)
      if num_reg>0:
           for x in range(num_reg):
                reg = region_options[x]
                regions.append(reg)
-               
+     st.write(regions)
      #Variables
      generatedsales = 0 #The generate revenue for the cluster
      increasesales = 0 #The increase of revenue
