@@ -95,11 +95,7 @@ if insight_button:
                     NewVal = 1
                elif regstr == 'Washington':
                     WashVal = 1
-     st.write(CaliVal)
-     st.write(ColoVal)
-     st.write(MasVal)
-     st.write(NewVal)
-     st.write(WashVal)
+     reg_vals = [CaliVal, ColoVal, MasVal, NewVal, WashVal]
 
      
      #Variables
@@ -122,12 +118,41 @@ if insight_button:
      elif hist_val == 2:
         od = pd.read_csv("./custdatav2.csv")
      #Filtering data based on clusters
+     newODdata = []
+     
      #v1filtered = custdatav1[(custdatav1['sale_cluster'] == spend_val) & (custdatav1['Customer_age_cluster'] == hist_val) & (custdatav1['frequency_cluster'] == freq_val )]
      #v2filtered = custdatav2[(custdatav2['sale_cluster'] == spend_val) & (custdatav2['Customer_age_cluster'] == hist_val) & (custdatav2['frequency_cluster'] == freq_val )]
      filteredod = orderdata[(orderdata['sale_cluster'] == spend_val) & (orderdata['Customer_age_cluster'] == hist_val) & (orderdata['frequency_cluster'] == freq_val )]
+     CaliOD = filteredod[(filteredod['REGION_California'] == CaliVal)]
+     ColoOD = filteredod[(filteredod['REGION_Colorado'] == ColoVal)]
+     MasOD = filteredod[(filteredod['REGION_Massachusetts'] == MasVal)]
+     NyOD = filteredod[(filteredod['REGION_New York'] == NewVal)]
+     WasOD = filteredod[(filteredod['REGION_Washington'] == WashVal)]
+     reg_data = [CaliOD, ColoOD, MasOD, NyOD, WasOD]
+
+     
+     for i in range(len(reg_vals)):
+          if reg_vals[i] == 1:
+               newODdata.append(reg_data[i])
+     filteredod = pd.concat(newODdata)
      odgb = filteredod.groupby(['YEAR_OF_ORDER'])['ORDER_AMOUNT'].sum()
+
+     newCDData = []
      #filteredcd = pd.concat([v1filtered, v2filtered])
      filteredcd = od[(od['sale_cluster'] == spend_val) & (od['frequency_cluster'] == freq_val )]
+     CaliCD = filteredod[(filteredod['REGION_California'] == CaliVal)]
+     ColoCD = filteredod[(filteredod['REGION_Colorado'] == ColoVal)]
+     MasCD = filteredod[(filteredod['REGION_Massachusetts'] == MasVal)]
+     NyCD = filteredod[(filteredod['REGION_New York'] == NewVal)]
+     WasCD = filteredod[(filteredod['REGION_Washington'] == WashVal)]
+     reg_CD = [CaliCD, ColoCD, MasCD, NyCD, WasCD]
+
+     
+     for i in range(len(reg_vals)):
+          if reg_vals[i] == 1:
+               newCDData.append(reg_CD[i])
+     filteredcd = pd.concat(newCDData)
+     
      clustermode = filteredcd.mode()
      gbmt = filteredod.groupby(['MENU_TYPE'])['MENU_TYPE'].count()
      gbmt = gbmt.sort_values(ascending = False)
