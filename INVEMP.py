@@ -19,9 +19,9 @@ def load_orderdata():
      od = pd.read_csv("./orderdatav2.csv")
      return od
 
-tab1, tab2, tab3, tab4, tab5 = st.tabs(['Churn Prediction', 'Customer Revenue Calculation', 'Bundled Items Sales Analysis', 'Prediction D', 'Prediction E'])
+tab1 = st.tabs(['Customer Revenue Calculation'])
 
-with tab2:
+with tab1:
      st.title('💲 Calculation of Revenue 💲')
      st.markdown("This tab predicts whether or not the customers in a selected cluster is likely to churn. It also includes insights on the selected cluster, such as their total revenue by year \
                  as well as the number of orders made by this cluster for each menu type. \nAt the bottom, there is a revenue calculation to estimate the revenue by this cluster \
