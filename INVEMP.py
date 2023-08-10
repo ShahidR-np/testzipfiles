@@ -77,6 +77,7 @@ MasVal = 0
 NewVal = 0
 WashVal = 0
 def set_regionvals(region):
+     st.write(region)
      if region == 'California':
           CaliVal = 1
      elif region == 'Colorado':
