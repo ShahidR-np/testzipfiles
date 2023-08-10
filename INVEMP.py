@@ -64,6 +64,12 @@ with col2_t2:
 with col3_t2:
      history_level_t2 = st.selectbox("Customer's History", ("Long-Standing", "Regular", "New"))
 
+region_options = st.multiselect(
+    'Region',
+    ['California', 'Colorado', 'Massachusetts', 'New York', 'Washington'])
+menu_Type_options = st.multiselect(
+    'Menu Type',
+    ['BBQ','Chinese','Crepes','Ethiopian','Grilled Cheese', 'Gyros', 'Hot Dogs', 'Ice Cream','Indian','Mac & Cheese','Poutine','Ramen','Sandwiches','Tacos','Vegetarian'])
 #Variables
 generatedsales = 0 #The generate revenue for the cluster
 increasesales = 0 #The increase of revenue
