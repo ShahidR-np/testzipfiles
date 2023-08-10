@@ -84,6 +84,7 @@ insight_button = st.button("Get Insights")
 if insight_button:
      st.write(list(region_options))
      st.write(region_options[1])
+     st.write(len(region_options))
      #Variables
      generatedsales = 0 #The generate revenue for the cluster
      increasesales = 0 #The increase of revenue
