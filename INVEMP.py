@@ -10,7 +10,7 @@ from urllib.error import URLError
 
 st.set_page_config(page_title='INVEMP Tasty Bytes', page_icon='🍖🍕🍜')
 
-st.sidebar.title("INVEMP: Customer Revenue Calculation - Shahid")
+st.sidebar.title("INVEMP: Customer Sales Calculation - Shahid")
 st.sidebar.markdown("This web app allows you to view the likelihood of a group of customers churning. With the prevention of these customers churning, we can get an estimated calculation of the future revenue by this group of customers")
 
 @st.cache_data
