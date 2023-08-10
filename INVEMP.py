@@ -19,7 +19,7 @@ def load_orderdata():
      return od
 
 
-st.title('💲Customer Revenue Calculation💲')
+st.title('💲Customer Sales Calculation💲')
 st.markdown("This tab predicts whether or not the customers in a selected cluster is likely to churn. It also includes insights on the selected cluster, such as their total revenue by year as well as the number of orders made by this cluster for each menu type.")
 st.markdown("At the bottom, there is a revenue calculation to estimate the revenue by this cluster in the following year if they do not churn. This calculation is based on the cluster's revenue generated in the previous years.")
 st.markdown('________________________________________________')
@@ -159,9 +159,9 @@ st.write("After the implementation of discount coupon vouchers to these group of
 st.write("- The group of customer is less likely to churn the following year")
 
 st.header("Revenue Calculation")
-st.write("- In the year 2022, this group of customers have generated an average monthly revenue of {0:.2f}".format(avemth2022))
-st.write("- In the following year, this group of customer is estimated to have an increase of {0:.2f}% in revenue sales".format(percinc2023))
-st.write("- This translates into a estimated monthly revenue of {0:.2f}, which is a total revenue of {1:.2f}.".format(avemth2023, odgb2023))
+st.write("- In the year 2022, this group of customers have generated an average monthly sales of {0:.2f}".format(avemth2022))
+st.write("- In the following year, this group of customer is estimated to have an increase of {0:.2f}% in sales".format(percinc2023))
+st.write("- This translates into a estimated monthly sales of {0:.2f}, which is a total sales of {1:.2f}.".format(avemth2023, odgb2023))
 
 
 
