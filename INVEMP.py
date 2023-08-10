@@ -78,6 +78,7 @@ if insight_button:
      NewVal = 0
      WashVal = 0
      ColoVal = 0
+     reg_chosen = 0
 
      if len(region_options) > 0:
           # for i in range(len(region_options)):
@@ -95,8 +96,9 @@ if insight_button:
                     NewVal = 1
                elif regstr == 'Washington':
                     WashVal = 1
+     elif len(region_options) == 0:
+          reg_chosen = 1
      reg_vals = [CaliVal, ColoVal, MasVal, NewVal, WashVal]
-
      
      #Variables
      generatedsales = 0 #The generate revenue for the cluster
@@ -134,7 +136,9 @@ if insight_button:
      for i in range(len(reg_vals)):
           if reg_vals[i] == 1:
                newODdata.append(reg_data[i])
-     filteredod = pd.concat(newODdata)
+     if reg_chosen == 0:
+          st.write("Regions Chosen")
+          filteredod = pd.concat(newODdata)
      odgb = filteredod.groupby(['YEAR_OF_ORDER'])['ORDER_AMOUNT'].sum()
 
      newCDData = []
@@ -151,7 +155,9 @@ if insight_button:
      for i in range(len(reg_vals)):
           if reg_vals[i] == 1:
                newCDData.append(reg_CD[i])
-     filteredcd = pd.concat(newCDData)
+     if reg_chosen == 0:
+          st.write("Regions Chosen cd ")
+          filteredcd = pd.concat(newCDData)
      
      clustermode = filteredcd.mode()
      gbmt = filteredod.groupby(['MENU_TYPE'])['MENU_TYPE'].count()
