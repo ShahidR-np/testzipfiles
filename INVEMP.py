@@ -79,13 +79,13 @@ WashVal = 0
 def set_regionvals(region):
      if region == 'California':
           CaliVal = 1
-     else if region == 'Colorado':
+     elif region == 'Colorado':
           ColoVal = 1
-     else if region == 'Massachusetts':
+     elif region == 'Massachusetts':
           MasVal = 1
-     else if region == 'New York':
+     elif region == 'New York':
           NewVal = 1
-     else if region == 'Washington':
+     elif region == 'Washington':
           WashVal = 1
           
 insight_button = st.button("Get Insights")
