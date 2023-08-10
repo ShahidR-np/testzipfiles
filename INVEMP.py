@@ -70,19 +70,30 @@ region_options = st.multiselect(
 menu_Type_options = st.multiselect(
     'Menu Type',
     ['BBQ','Chinese','Crepes','Ethiopian','Grilled Cheese', 'Gyros', 'Hot Dogs', 'Ice Cream','Indian','Mac & Cheese','Poutine','Ramen','Sandwiches','Tacos','Vegetarian'])
-
+          
 CaliVal = 0
 ColoVal = 0 
 MasVal = 0
 NewVal = 0
 WashVal = 0
-
+def set_regionvals(region):
+     if region == 'California':
+          CaliVal = 1
+     else if region == 'Colorado':
+          ColoVal = 1
+     else if region == 'Massachusetts':
+          MasVal = 1
+     else if region == 'New York':
+          NewVal = 1
+     else if region == 'Washington':
+          WashVal = 1
+          
 insight_button = st.button("Get Insights")
 if insight_button:
      if len(region_options) > 0:
-          st.write("menuoptions:", region_options)
-          if region_options.contains('California'):
-               CaliVal = 1
+          for i in range(len(region_options)):
+               st.write(region_options[i])
+               set_regionvals(region_options[i])
      st.write(CaliVal)
      
      #Variables
