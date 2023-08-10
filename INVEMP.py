@@ -70,7 +70,13 @@ region_options = st.multiselect(
 # menu_Type_options = st.multiselect(
 #     'Menu Type',
 #     ['BBQ','Chinese','Crepes','Ethiopian','Grilled Cheese', 'Gyros', 'Hot Dogs', 'Ice Cream','Indian','Mac & Cheese','Poutine','Ramen','Sandwiches','Tacos','Vegetarian'])
-          
+freq_dict= {'High Frequency':0, 'Average Frequency':2, 'Low Frequency':1}
+spend_dict= {'High-Spending':0, 'Average-Spending':2, 'Low-Spending':1}
+hist_dict= {"Long-Standing":2, "Regular":0, "New":1}
+
+freq_val = freq_dict[frequency_level_t2]
+spend_val = spend_dict[spending_level_t2]
+hist_val = hist_dict[history_level_t2]         
 insight_button = st.button("Get Insights")
 if insight_button:
      CaliVal = 0
@@ -106,13 +112,7 @@ if insight_button:
      increaseperc = 0 #The increase of percentage in sales
      
      #Cluster vals
-     freq_dict= {'High Frequency':0, 'Average Frequency':2, 'Low Frequency':1}
-     spend_dict= {'High-Spending':0, 'Average-Spending':2, 'Low-Spending':1}
-     hist_dict= {"Long-Standing":2, "Regular":0, "New":1}
-     
-     freq_val = freq_dict[frequency_level_t2]
-     spend_val = spend_dict[spending_level_t2]
-     hist_val = hist_dict[history_level_t2]
+
      if hist_val == 0:
         od = pd.read_csv("./custdatav0.csv")
      elif hist_val == 1:
