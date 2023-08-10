@@ -88,6 +88,9 @@ if insight_button:
                reg = region_options[x]
                regions.append(reg)
                st.write(reg)
+     if regions.contains('California'):
+          CaliVal = 1
+     st.write(CaliVal)
      st.write(regions)
      #Variables
      generatedsales = 0 #The generate revenue for the cluster
