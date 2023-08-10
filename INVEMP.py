@@ -173,6 +173,33 @@ if insight_button:
 
 button_return_value = st.button("Predict")
 if button_return_value:
+     CaliVal = 0
+     MasVal = 0
+     NewVal = 0
+     WashVal = 0
+     ColoVal = 0
+     reg_chosen = 0
+
+     if len(region_options) > 0:
+          # for i in range(len(region_options)):
+          #      st.write(region_options[i])
+          #      set_regionvals(region_options[i])
+          for i in region_options:
+               regstr = str(i)
+               if regstr == 'California':
+                    CaliVal = 1
+               elif regstr == 'Colorado':
+                    ColoVal = 1
+               elif regstr == 'Massachusetts':
+                    MasVal = 1
+               elif regstr == 'New York':
+                    NewVal = 1
+               elif regstr == 'Washington':
+                    WashVal = 1
+     elif len(region_options) == 0:
+          reg_chosen = 1
+     reg_vals = [CaliVal, ColoVal, MasVal, NewVal, WashVal]
+     
      if hist_val == 0:
         od = pd.read_csv("./custdatav0.csv")
      elif hist_val == 1:
