@@ -137,7 +137,6 @@ if insight_button:
           if reg_vals[i] == 1:
                newODdata.append(reg_data[i])
      if reg_chosen == 0:
-          st.write("Regions Chosen")
           filteredod = pd.concat(newODdata)
      odgb = filteredod.groupby(['YEAR_OF_ORDER'])['ORDER_AMOUNT'].sum()
 
@@ -222,7 +221,6 @@ if button_return_value:
           if reg_vals[i] == 1:
                newCDData.append(reg_CD[i])
      if reg_chosen == 0:
-          st.write("Regions Chosen cd ")
           filteredcd = pd.concat(newCDData)
      
      clustermode = filteredcd.mode()
