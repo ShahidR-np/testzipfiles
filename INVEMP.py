@@ -11,8 +11,7 @@ from urllib.error import URLError
 st.set_page_config(page_title='INVEMP Tasty Bytes', page_icon='🍖🍕🍜')
 
 st.sidebar.title("INVEMP: Customer Revenue Calculation - Shahid")
-st.sidebar.markdown("This web app allows you to view the likelihood of a group of customers churning. \
-With the prevention of these customers churning, we can get an estimated calculation of the future revenue by this group of customers")
+st.sidebar.markdown("This web app allows you to view the likelihood of a group of customers churning. With the prevention of these customers churning, we can get an estimated calculation of the future revenue by this group of customers")
 
 @st.cache_data
 def load_orderdata():
@@ -21,10 +20,8 @@ def load_orderdata():
 
 
 st.title('💲Customer Revenue Calculation💲')
-st.markdown("This tab predicts whether or not the customers in a selected cluster is likely to churn. It also includes insights on the selected cluster, such as their total revenue by year \
-            as well as the number of orders made by this cluster for each menu type.")
-st.markdown("At the bottom, there is a revenue calculation to estimate the revenue by this cluster \
-            in the following year if they do not churn. This calculation is based on the cluster's revenue generated in the previous years.")
+st.markdown("This tab predicts whether or not the customers in a selected cluster is likely to churn. It also includes insights on the selected cluster, such as their total revenue by year as well as the number of orders made by this cluster for each menu type.")
+st.markdown("At the bottom, there is a revenue calculation to estimate the revenue by this cluster in the following year if they do not churn. This calculation is based on the cluster's revenue generated in the previous years.")
 st.markdown('________________________________________________')
 
 def read_csv_from_zipped_github(url):
