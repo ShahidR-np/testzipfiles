@@ -20,9 +20,9 @@ def load_orderdata():
      return od
 
 
-st.title('💲 Calculation of Customer Revenue 💲')
-st.markdown("This tab predicts whether or not the customers in a selected cluster is likely to churn. It also includes insights on the selected cluster, such as their total revenue by year \
-            as well as the number of orders made by this cluster for each menu type. \nAt the bottom, there is a revenue calculation to estimate the revenue by this cluster \
+st.title('💲Calculation of Customer Revenue💲')
+st.markdown("This tab predicts whether or not the customers in a selected cluster is likely to churn.  \nIt also includes insights on the selected cluster, such as their total revenue by year \
+            as well as the number of orders made by this cluster for each menu type.  \nAt the bottom, there is a revenue calculation to estimate the revenue by this cluster \
             in the following year if they do not churn. This calculation is based on the cluster's revenue generated in the previous years.")
 st.markdown('________________________________________________')
 
