@@ -238,7 +238,6 @@ if button_return_value:
      NyOD = filteredod[(filteredod['REGION_New York'] == NewVal)]
      WasOD = filteredod[(filteredod['REGION_Washington'] == WashVal)]
      reg_data = [CaliOD, ColoOD, MasOD, NyOD, WasOD]
-     odgb = filteredod.groupby(['YEAR_OF_ORDER'])['ORDER_AMOUNT'].sum()
 
      
      for i in range(len(reg_vals)):
@@ -249,7 +248,7 @@ if button_return_value:
           filteredod = pd.concat(newODdata)
      with open('cdc_xgb.pkl', 'rb') as file:
           cdcxgb = pickle.load(file)
-
+     odgb = filteredod.groupby(['YEAR_OF_ORDER'])['ORDER_AMOUNT'].sum()
      clustermode['frequency_cluster'] = freq_val
      clustermode['Customer_age_cluster'] = hist_val
      clustermode['sale_cluster'] = spend_val
