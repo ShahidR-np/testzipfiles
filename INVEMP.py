@@ -87,6 +87,7 @@ if insight_button:
           for x in range(num_reg):
                reg = region_options[x]
                regions.append(reg)
+               st.write(reg)
      st.write(regions)
      #Variables
      generatedsales = 0 #The generate revenue for the cluster
