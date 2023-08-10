@@ -238,6 +238,7 @@ if button_return_value:
      NyOD = filteredod[(filteredod['REGION_New York'] == NewVal)]
      WasOD = filteredod[(filteredod['REGION_Washington'] == WashVal)]
      reg_data = [CaliOD, ColoOD, MasOD, NyOD, WasOD]
+     odgb = filteredod.groupby(['YEAR_OF_ORDER'])['ORDER_AMOUNT'].sum()
 
      
      for i in range(len(reg_vals)):
