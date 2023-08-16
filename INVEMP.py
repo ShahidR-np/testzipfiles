@@ -11,7 +11,7 @@ from urllib.error import URLError
 st.set_page_config(page_title='INVEMP Tasty Bytes', page_icon='🍖🍕🍜')
 
 st.sidebar.title("INVEMP: Customer Sales Calculation - Shahid")
-st.sidebar.markdown("This web app allows you to view the likelihood of a group of customers churning. With the prevention of these customers churning, we can get an estimated calculation of the future revenue by this group of customers")
+st.sidebar.markdown("This web app allows you to view the likelihood of a group of customers churning. With the prevention of these customers churning, we can get an estimated calculation of the future sales by this group of customers")
 
 @st.cache_data
 def load_orderdata():
@@ -20,8 +20,8 @@ def load_orderdata():
 
 
 st.title('💲Customer Sales Calculation💲')
-st.markdown("This tab predicts whether or not the customers in a selected cluster is likely to churn. It also includes insights on the selected cluster, such as their total revenue by year as well as the number of orders made by this cluster for each menu type.")
-st.markdown("At the bottom, there is a revenue calculation to estimate the revenue by this cluster in the following year if they do not churn. This calculation is based on the cluster's revenue generated in the previous years.")
+st.markdown("This tab predicts whether or not the customers in a selected cluster is likely to churn. It also includes insights on the selected cluster, such as their total sales by year as well as the number of orders made by this cluster for each menu type.")
+st.markdown("At the bottom, there is a sales calculation to estimate the sales by this cluster in the following year if they do not churn. This calculation is based on the cluster's sales generated in the previous years.")
 st.markdown('________________________________________________')
 
 def read_csv_from_zipped_github(url):
@@ -62,7 +62,8 @@ with col2_t2:
 
 # Third dropdown list - Age Level
 with col3_t2:
-     history_level_t2 = st.selectbox("Customer's History", ("Long-Standing", "Regular", "New"))
+     history_level_t2 = st.selectbox("Customer's Age", ("Old", "Average", "Young"))
+     #history_level_t2 = st.selectbox("Customer's History", ("Long-Standing", "Regular", "New"))
 
 region_options = st.multiselect(
     'Region',
@@ -72,7 +73,7 @@ region_options = st.multiselect(
 #     ['BBQ','Chinese','Crepes','Ethiopian','Grilled Cheese', 'Gyros', 'Hot Dogs', 'Ice Cream','Indian','Mac & Cheese','Poutine','Ramen','Sandwiches','Tacos','Vegetarian'])
 freq_dict= {'High Frequency':0, 'Average Frequency':2, 'Low Frequency':1}
 spend_dict= {'High-Spending':0, 'Average-Spending':2, 'Low-Spending':1}
-hist_dict= {"Long-Standing":2, "Regular":0, "New":1}
+hist_dict= {"Old":2, "Average":0, "Young":1}
 
 freq_val = freq_dict[frequency_level_t2]
 spend_val = spend_dict[spending_level_t2]
