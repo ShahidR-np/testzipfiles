@@ -243,7 +243,7 @@ if button_return_value:
           if reg_vals[i] == 1:
                newODdata.append(reg_data[i])
      if reg_chosen == 0:
-          st.write("Regions Chosen")
+          #st.write("Regions Chosen")
           filteredod = pd.concat(newODdata)
      with open('cdc_xgb.pkl', 'rb') as file:
           cdcxgb = pickle.load(file)
